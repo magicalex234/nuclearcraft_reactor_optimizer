@@ -29,7 +29,7 @@ mmax_heat = 0
 
 10000.times do |i|
 
-    m = Reactor.new(3,3,3,pb,hb)
+    m = Reactor.new(3,3,3,:tbu)
     brute_force_build(i,m)
     p,h = m.evaluate()
     next if h > 0
@@ -48,6 +48,12 @@ mmax_heat = 0
 end
 
 puts
+puts
+puts "Optimal design tested:"
+puts "Power: #{mmax_power}"
+        puts "Heat : #{mmax_heat}"
+puts
 puts mmax.to_s
+
 
 puts "Done."

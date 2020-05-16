@@ -1,11 +1,22 @@
 require_relative "cube"
 
 class Reactor
-    def initialize(x,y,z,pb,hb)
+    def initialize(x,y,z,fuel)
         @cube = Cube.new(x,y,z)
-        @pb = pb
-        @hb = hb
+        @fuel = fuel
+        set_base_stats(@fuel)
         @count = 0
+    end
+
+    def set_base_stats(fuel)
+        #instead of defining base stats as 2 constants, we define it as one of the many fuels, then put all the fuel
+        case fuel
+        when :tbu
+            @pb = 60
+            @hb = 18
+        else
+            raise "I don't know this fuel"
+        end
     end
 
     def set(x,y,z,v)
@@ -78,11 +89,7 @@ class Reactor
 
     def adj_on_axis?(x,y,z,type)
         #alex did this on his own
-        if adj_count(x,y,z,type) >= 2 || ((get(x+1,y,z) == type && get(x-1,y,z) == type) || (get(x,y+1,z) == type && get(x,y-1,z) == type) || (get(x,y,z+1) == type && get(x,y,z-1) == type))
-            true
-        else
-            false
-        end
+        (get(x+1,y,z) == type && get(x-1,y,z) == type) || (get(x,y+1,z) == type && get(x,y-1,z) == type) || (get(x,y,z+1) == type && get(x,y,z-1) == type)
     end
 
 

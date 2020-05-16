@@ -40,7 +40,7 @@ class CubeTest < Test::Unit::TestCase
     def test_eval_empty_reactor
         pb = 60
         hb = 18
-        m = Reactor.new(3,3,3,pb,hb)
+        m = Reactor.new(3,3,3,:tbu)
         p,h = m.evaluate()
         assert_equal(0,p)
         assert_equal(0,h)    
@@ -49,7 +49,7 @@ class CubeTest < Test::Unit::TestCase
  def test_eval1
     pb = 60
     hb = 18
-    m = Reactor.new(3,3,3,pb,hb)
+    m = Reactor.new(3,3,3,:tbu)
     assert_true m.set(0,0,0,:reactor)
     p,h = m.evaluate()
     assert_equal(pb,p)
@@ -60,7 +60,7 @@ class CubeTest < Test::Unit::TestCase
  def test_eval2
     pb = 60
     hb = 18
-    m = Reactor.new(3,3,3,pb,hb)
+    m = Reactor.new(3,3,3,:tbu)
     assert_true m.set(0,0,0,:reactor)
     assert_true m.set(1,0,0,:reactor)
     p,h = m.evaluate()
@@ -71,7 +71,7 @@ class CubeTest < Test::Unit::TestCase
  def test_eval3
     pb = 60
     hb = 18
-    m = Reactor.new(3,3,3,pb,hb)
+    m = Reactor.new(3,3,3,:tbu)
     assert_true m.set(0,0,0,:reactor)
     assert_true m.set(1,0,0,:reactor)
     assert_true m.set(0,1,0,:reactor)
@@ -83,7 +83,7 @@ class CubeTest < Test::Unit::TestCase
  def test_eval4
     pb = 60
     hb = 18
-    m = Reactor.new(3,3,3,pb,hb)
+    m = Reactor.new(3,3,3,:tbu)
     assert_true m.set(0,0,0,:reactor)
     assert_true m.set(1,0,0,:reactor)
     assert_true m.set(0,1,0,:reactor)
@@ -96,7 +96,7 @@ class CubeTest < Test::Unit::TestCase
  def test_water
     pb = 60
     hb = 18
-    m = Reactor.new(3,3,3,pb,hb)
+    m = Reactor.new(3,3,3,:tbu)
     # We can't add water to this location because there is no reactor adjacent
     assert_true m.set(0,0,0,:reactor)
     assert_true m.set(1,0,0,:water)
@@ -108,7 +108,7 @@ class CubeTest < Test::Unit::TestCase
  def test_bad_water
     pb = 60
     hb = 18
-    m = Reactor.new(3,3,3,pb,hb)
+    m = Reactor.new(3,3,3,:tbu)
     # We can't add water to this location because there is no reactor adjacent
     assert_true m.set(0,0,0,:reactor)
     assert_false m.set(1,1,1,:water)
@@ -118,7 +118,7 @@ class CubeTest < Test::Unit::TestCase
  def test_bad_redstone
     pb = 60
     hb = 18
-    m = Reactor.new(3,3,3,pb,hb)
+    m = Reactor.new(3,3,3,:tbu)
     # We can't add water to this location because there is no reactor adjacent
     assert_true m.set(0,0,0,:reactor)
     assert_false m.set(1,1,1,:redstone)
@@ -128,7 +128,7 @@ class CubeTest < Test::Unit::TestCase
  def test_redstone
     pb = 60
     hb = 18
-    m = Reactor.new(3,3,3,pb,hb)
+    m = Reactor.new(3,3,3,:tbu)
     # We can't add water to this location because there is no reactor adjacent
     assert_true m.set(0,0,0,:reactor)
     assert_true m.set(1,0,0,:redstone)
@@ -140,7 +140,7 @@ class CubeTest < Test::Unit::TestCase
  def test_bad_moderator
     pb = 60
     hb = 18
-    m = Reactor.new(3,3,3,pb,hb)
+    m = Reactor.new(3,3,3,:tbu)
     # We can't add mdoerator to this location because there is no reactor adjacent
     assert_true m.set(0,0,0,:reactor)
     assert_false m.set(1,1,1,:moderator)
@@ -150,7 +150,7 @@ class CubeTest < Test::Unit::TestCase
  def test_moderator1
     pb = 60
     hb = 18
-    m = Reactor.new(3,3,3,pb,hb)
+    m = Reactor.new(3,3,3,:tbu)
     # We can't add water to this location because there is no reactor adjacent
     assert_true m.set(0,0,0,:reactor)
     assert_true m.set(1,0,0,:moderator)
@@ -162,7 +162,7 @@ class CubeTest < Test::Unit::TestCase
  def test_moderator2
     pb = 60
     hb = 18
-    m = Reactor.new(3,3,3,pb,hb)
+    m = Reactor.new(3,3,3,:tbu)
     # We can't add water to this location because there is no reactor adjacent
     assert_true m.set(0,0,0,:reactor)
     assert_true m.set(0,1,0,:reactor)
@@ -195,7 +195,7 @@ def test_random_reactor_and_water
     pb = 60
     hb = 18
     1000.times do 
-        m = Reactor.new(3,3,3,pb,hb)
+        m = Reactor.new(3,3,3,:tbu)
         x = Random.rand(3)
         y = Random.rand(3)
         z = Random.rand(3)
@@ -221,7 +221,7 @@ end
 def test_eval5
     pb = 60
     hb = 18
-    m = Reactor.new(3,3,3,pb,hb)
+    m = Reactor.new(3,3,3,pb,hb,:tbu)
     assert_true m.set(1,0,0,:reactor)
     assert_true m.set(1,1,0,:reactor)
     assert_true m.set(2,0,2,:reactor)
@@ -255,7 +255,7 @@ def test_eval5
 def test_full
     pb = 60
     hb = 18
-    m = Reactor.new(3,3,3,pb,hb)
+    m = Reactor.new(3,3,3,:tbu)
 
     3.times do |x|
         3.times do |y|
@@ -271,19 +271,19 @@ def test_full
 end
 
 
-def test_eval7
-    pb = 60
-    hb = 18
-    m = Reactor.new(3,3,3,pb,hb)
-    assert_true m.set(0,1,0,:reactor)
-    assert_true m.set(0,1,2,:reactor)
-    assert_true m.set(0,0,0,:lapis)
-    assert_true m.set(0,0,2,:lapis)
-    assert_true m.set(0,0,1,:tin)
-    assert_true m.adj_on_axis?(0,0,1,:lapis)
-    assert_true m.adj_on_axis?(0,1,1,:reactor)
-    assert_false m.adj_on_axis?(0,0,1,:reactor)
-end
+    def test_on_axis
+        pb = 60
+        hb = 18
+        m = Reactor.new(3,3,3,:tbu)
+        assert_true m.set(0,1,0,:reactor)
+        assert_true m.set(0,1,2,:reactor)
+        assert_true m.set(0,0,0,:lapis)
+        assert_true m.set(0,0,2,:lapis)
+        assert_true m.set(0,0,1,:tin)
+        assert_true m.adj_on_axis?(0,0,1,:lapis)
+        assert_true m.adj_on_axis?(0,1,1,:reactor)
+        assert_false m.adj_on_axis?(0,0,1,:reactor)
+    end
 
 end
 

@@ -51,15 +51,16 @@ class Cube
 
   def to_s
     s = ""
-    s += "-"*20 + "\n"
+    s += "-"*37 + "\n"
     @dim_z.times do |z|
         @dim_y.times do |y|
+          s += "| "
             @dim_x.times do |x|
-                s += "#{get(x,y,z)} | "
+                s += "#{get(x,y,z).to_s.ljust(9)} | "
             end
             s += "\n"
         end
-        s += "-"*20 + "\n"
+        s += "-"*37 + "\n"
     end
 
     s
