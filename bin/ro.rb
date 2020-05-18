@@ -69,6 +69,5 @@ puts
 puts mmax.to_s
 puts
 puts "Score/ms/iteration: #{(total_score/iterations).to_i}"
-puts "Punishment/ms/iteration: #{(total_punishment/iterations).to_i}"
 
 puts "Done."
