@@ -92,6 +92,18 @@ class Reactor
         (get(x+1,y,z) == type && get(x-1,y,z) == type) || (get(x,y+1,z) == type && get(x,y-1,z) == type) || (get(x,y,z+1) == type && get(x,y,z-1) == type)
     end
 
+    #score funtion to measure value of tested reactor
+    def self.score(power,heat,duration)
+        if heat > 0
+            # invalid reactor no score
+            val = -1000*(duration * 1000)
+            #val = 0
+        else
+            val = power/(duration * 1000)
+        end
+
+        val
+    end
 
     def to_s
         @cube.to_s

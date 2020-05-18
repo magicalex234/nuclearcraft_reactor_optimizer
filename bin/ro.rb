@@ -26,12 +26,25 @@ hb = 18
 mmax = nil
 mmax_power = 0
 mmax_heat = 0
+total_score = 0
+total_punishment = 0
+iterations = 10000
 
-10000.times do |i|
+iterations.times do |i|
 
-    m = Reactor.new(3,3,3,:tbu)
-    brute_force_build(i,m)
-    p,h = m.evaluate()
+    start = Time.now
+
+    while true
+        m = Reactor.new(3,3,3,:tbu)
+        brute_force_build(i,m)
+        p,h = m.evaluate()
+        next if h > 0
+        break
+    end
+    duration = Time.now - start
+    score = Reactor.score(p,h,duration)
+    total_punishment += score if score < 0
+    total_score += score
     next if h > 0
 
     if mmax.nil? || p > mmax_power || ( p == mmax_power && h < mmax_heat )
@@ -54,6 +67,8 @@ puts "Power: #{mmax_power}"
         puts "Heat : #{mmax_heat}"
 puts
 puts mmax.to_s
-
+puts
+puts "Score/ms/iteration: #{(total_score/iterations).to_i}"
+puts "Punishment/ms/iteration: #{(total_punishment/iterations).to_i}"
 
 puts "Done."
